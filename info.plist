@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>tox.new_event</string>
+	<key>connections</key>
+	<dict>
+		<key>606403E8-91C9-4966-92FF-80D901B897E8</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>56D8FF3F-183A-496A-8338-79769ED3D74C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+		<key>81CE903D-58B3-40A8-AAB1-48891E062E2D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>606403E8-91C9-4966-92FF-80D901B897E8</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Toshiro Sugii</string>
+	<key>description</key>
+	<string>cal [event] at [time] on [date] in [location] @[calendar name] alarm [X min|hour|day|month|year] ...</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Add Calendar Event</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>4</integer>
+				<key>script</key>
+				<string>osascript main.scpt "{query}"</string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>606403E8-91C9-4966-92FF-80D901B897E8</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>output</key>
+				<integer>0</integer>
+				<key>removeextension</key>
+				<false/>
+				<key>sticky</key>
+				<false/>
+				<key>text</key>
+				<string>New event created</string>
+				<key>title</key>
+				<string>Calendar</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>56D8FF3F-183A-496A-8338-79769ED3D74C</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>4</integer>
+				<key>keyword</key>
+				<string>cal</string>
+				<key>runningsubtext</key>
+				<string>Creating Event...</string>
+				<key>script</key>
+				<string>ruby result.rb "{query}"</string>
+				<key>subtext</key>
+				<string>cal [event] at [time] on [date] in [location] @[calendar name] alarm [X min|hour|day|month|year] ...</string>
+				<key>title</key>
+				<string>Add Calendar Event</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>81CE903D-58B3-40A8-AAB1-48891E062E2D</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>Just type:
+cal [event] at [time] [on [date]] in [location] @[calendar name] alarm [X min|hour|day|month|year] ...
+
+You can "on [date]" or "today" or "tomorrow"
+
+Without alarm, it sets one alarm at the event's time.
+For each alarm you want to set, just type [X min|hour|day|month|year] for each alam.
+IE.: cal meeting at 10:23 pm today alarm 1 min 30 minutes 2 hours
+
+It sets 3 alarms - 1 minute before the event, 30 minutes before and 2 hours before.
+
+
+Thank you.
+Made by Toshiro Sugii
+I hope it helps you in some way.
+A huge hug.
+
+
+CHANGELOG
+
+1.4:
+— Bug fix: Calendar name was always ignored.
+
+1.3:
+- Added support to names of the days of the week after "ON"
+
+1.2:
+- Added support to AM and PM after [time].
+
+1.1: 
+- Feedback result added!
+- Some bug fixes.
+
+1.0.1 - Preference's folder changed.
+
+1.0 - Initial production version</string>
+	<key>uidata</key>
+	<dict>
+		<key>56D8FF3F-183A-496A-8338-79769ED3D74C</key>
+		<dict>
+			<key>ypos</key>
+			<real>10</real>
+		</dict>
+		<key>606403E8-91C9-4966-92FF-80D901B897E8</key>
+		<dict>
+			<key>ypos</key>
+			<real>10</real>
+		</dict>
+		<key>81CE903D-58B3-40A8-AAB1-48891E062E2D</key>
+		<dict>
+			<key>ypos</key>
+			<real>130</real>
+		</dict>
+	</dict>
+	<key>webaddress</key>
+	<string>http://code.google.com/p/tox-alfred-workflows/</string>
+</dict>
+</plist>
