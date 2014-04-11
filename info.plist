@@ -4,6 +4,8 @@
 <dict>
 	<key>bundleid</key>
 	<string>tox.new_event</string>
+	<key>category</key>
+	<string>Productivity</string>
 	<key>connections</key>
 	<dict>
 		<key>606403E8-91C9-4966-92FF-80D901B897E8</key>
@@ -131,6 +133,9 @@ A huge hug.
 
 
 CHANGELOG
+
+1.5:
+- Bug fix: Check if calendar name was set correctly.
 
 1.4:
 — Bug fix: Calendar name was always ignored.
