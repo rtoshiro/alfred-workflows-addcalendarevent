@@ -6,7 +6,7 @@ $today = Time.now
 
 $calendar = nil
 $desc     = nil
-$location = "\"\""
+$location = ""
 $hour     = 9
 $minute    = 0
 $day = $today.day
@@ -14,6 +14,9 @@ $month = $today.month
 $year = $today.year
 $all_day  = "false"
 $alarm_to_set = []
+
+$hour_to = -1
+$minute_to = 0
 
 $multiplier = {}
 $multiplier["m"] = 1
@@ -138,7 +141,48 @@ def parse_cal(query)
     
     query   = list[0]
   end
-
+  
+#   #Time - to
+#   if (query.index(" to ")) 
+#     list = query.split(" to ")
+#     query = strip_or_self(list[0])
+#     
+#     $hour_to = list[1]
+#     $minute_to = 0
+# 
+#     if ($hour_to.index(":"))
+#       h_list = $hour_to.split(":")
+#       $hour_to = h_list[0]
+#       $minute_to = h_list[1]
+#       
+#       if ($minute_to.downcase.index("pm"))
+#         min_list = $minute_to.split("pm")
+#         $minute_to = strip_or_self(min_list[0])
+#         if ($hour_to.to_i < 13)
+#           $hour_to = ($hour_to.to_i + 12).to_s
+#         end
+#       end
+#       
+#       if ($minute_to.downcase.index("am"))
+#         min_list = $minute_to.split("am")
+#         $minute_to = strip_or_self(min_list[0])
+#       end
+#     else
+#       if ($hour_to.downcase.index("pm"))
+#         min_list = $hour_to.split("pm")
+#         $hour_to = strip_or_self(min_list[0])
+#         if ($hour_to.to_i < 13)
+#           $hour_to = ($hour_to.to_i + 12).to_s
+#         end
+#       end
+#       
+#       if ($hour_to.downcase.index("am"))
+#         min_list = $hour_to.split("am")
+#         $hour_to = strip_or_self(min_list[0])
+#       end
+#     end
+#   end
+  
   # Time - at
   if (query.index(" at ")) 
     list = query.split(" at ")
@@ -178,10 +222,6 @@ def parse_cal(query)
         $hour = strip_or_self(min_list[0])
       end
     end
-
-puts $hour
-puts $minute
-
   else
     $desc = query
   end
@@ -196,9 +236,17 @@ if ($alarm_to_set.size == 0)
   $alarm_to_set.push("0")
 end
 
+# $start_date = Time.local($year,$month,$day,$hour,$minute,0) 
+# $end_date   = $start_date + 7200
+# 
+# puts $hour
+# puts $minute
+# puts $hour_to
+# puts $minute_to
+
 current_path = File.expand_path File.dirname(__FILE__)
 
-script = "osascript \"#{current_path}/new_event.scpt\" \"#{$calendar}\" \"#{$desc.to_s}\" #{$year.to_s} #{$month.to_s} #{$day.to_s} #{$hour.to_s} #{$minute.to_s} #{$location.to_s} #{$all_day}"
+script = "osascript \"#{current_path}/new_event.scpt\" \"#{$calendar}\" \"#{$desc.to_s}\" #{$year.to_s} #{$month.to_s} #{$day.to_s} #{$hour.to_s} #{$minute.to_s} \"#{$location.to_s}\" #{$all_day}"
 $alarm_to_set.each { |val|
   script = script + " -" + val.to_s
 }

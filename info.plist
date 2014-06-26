@@ -131,8 +131,12 @@ Made by Toshiro Sugii
 I hope it helps you in some way.
 A huge hug.
 
+https://github.com/rtoshiro/alfred-workflows-addcalendarevent
 
 CHANGELOG
+
+1.6:
+- Bug fix: Location name was buggy.
 
 1.5:
 - Bug fix: Check if calendar name was set correctly.
@@ -172,6 +176,6 @@ CHANGELOG
 		</dict>
 	</dict>
 	<key>webaddress</key>
-	<string>http://code.google.com/p/tox-alfred-workflows/</string>
+	<string>https://github.com/rtoshiro/alfred-workflows-addcalendarevent</string>
 </dict>
 </plist>
