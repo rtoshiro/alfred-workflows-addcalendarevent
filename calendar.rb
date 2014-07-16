@@ -111,6 +111,7 @@ def parse_cal(query)
       end
     else
       c_day = strip_or_self(list[1])
+      c_day = c_day.downcase
       if (!$weeks[c_day].nil?)
         c_week = $today.wday
         c_add = ($weeks[c_day] - 1) - c_week
@@ -128,8 +129,8 @@ def parse_cal(query)
     end
 
     query = list[0]
-  elsif (query.index(" today")) 
-    list = query.split(" today")
+  elsif (query.index(/ [tT]oday/)) 
+    list = query.split(/ [tT]oday/)
     query = list[0]
   elsif (query.index(" tomorrow")) 
     list = query.split(" tomorrow")
@@ -224,6 +225,7 @@ def parse_cal(query)
     end
   else
     $desc = query
+    $all_day = "true"
   end
   
 end
@@ -251,5 +253,5 @@ $alarm_to_set.each { |val|
   script = script + " -" + val.to_s
 }
 
-puts script
-`#{script}`
+#puts script
+puts `#{script}`
