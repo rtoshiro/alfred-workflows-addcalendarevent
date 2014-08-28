@@ -34,7 +34,7 @@
 	<key>createdby</key>
 	<string>Toshiro Sugii</string>
 	<key>description</key>
-	<string>cal [event] at [time] on [date] in [location] @[calendar name] alarm [X min|hour|day|month|year] ...</string>
+	<string>cal [event] [at [time][am|pm]] [on [date]] [every [date]] in [location] @[calendar name] alarm [X min|hour|day|month|year] ...</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -97,7 +97,7 @@
 				<key>script</key>
 				<string>ruby result.rb "{query}"</string>
 				<key>subtext</key>
-				<string>cal [event] at [time] on [date] in [location] @[calendar name] alarm [X min|hour|day|month|year] ...</string>
+				<string>cal [event] [at [time][am|pm]] [on [date]] [every [date]] in [location] @[calendar name] alarm [X min|hour|day|month|year] ...</string>
 				<key>title</key>
 				<string>Add Calendar Event</string>
 				<key>type</key>

@@ -15,6 +15,11 @@ $year = $today.year
 $all_day  = "false"
 $alarm_to_set = []
 
+$has_on_defined = false
+$recurrence_to_set = []
+$freq = 0
+$rep  = 0
+
 $hour_to = -1
 $minute_to = 0
 
@@ -53,6 +58,33 @@ $weeks["fri"] = 6
 $weeks["saturday"] = 7
 $weeks["sat"] = 7
 
+$months = {}
+$months["jan"] = 1
+$months["feb"] = 2
+$months["mar"] = 3
+$months["apr"] = 4
+$months["may"] = 5
+$months["jun"] = 6
+$months["jul"] = 7
+$months["aug"] = 8
+$months["sep"] = 9
+$months["oct"] = 10
+$months["nov"] = 11
+$months["dec"] = 12
+$months["january"] = 1
+$months["february"] = 2
+$months["march"] = 3
+$months["april"] = 4
+$months["may"] = 5
+$months["june"] = 6
+$months["july"] = 7
+$months["august"] = 8
+$months["september"] = 9
+$months["october"] = 10
+$months["november"] = 11
+$months["december"] = 12
+
+
 def parse_cal(query)
   # Alarm
   if (query.index(" alarm "))
@@ -90,10 +122,32 @@ def parse_cal(query)
     $location = strip_or_self(list[1])
     query = list[0]
   end
+  
+  # Repeat
+  # Recurrence
+  if (query.index(" every "))
+    list = query.split(" every ")
+    if (list[1])
+      recurrencies = strip_or_self(list[1])
+      query = list[0]
+    
+      recurrence_list = recurrencies.split(" ")
+      if (recurrence_list.size > 0)
+        counter = "."
+        recurrence_list.each { |val|
+          value = strip_or_self(val)
+          value = value.downcase
+      
+          $recurrence_to_set.push(value)
+        }
+      end
+    end
+  end
 
   # Date
   # Check if "on" exists
   if (query.index(" on ")) 
+    $has_on_defined = true
     list = query.split(" on ")
   
     # If month is defined
@@ -130,9 +184,11 @@ def parse_cal(query)
 
     query = list[0]
   elsif (query.index(/ [tT]oday/)) 
+    $has_on_defined = true
     list = query.split(/ [tT]oday/)
     query = list[0]
   elsif (query.index(" tomorrow")) 
+    $has_on_defined = true
     list = query.split(" tomorrow")
     
     tomorrow = $today + 86400
@@ -228,6 +284,78 @@ def parse_cal(query)
     $all_day = "true"
   end
   
+  if ($recurrence_to_set.size > 0)
+    # se tem dia
+    if ($recurrence_to_set.index("day"))
+      $freq = "DAILY"
+    elsif ($recurrence_to_set.index("week"))
+      $freq = "WEEKLY"
+    elsif ($recurrence_to_set.index("month"))
+      $freq = "MONTHLY"
+    elsif ($recurrence_to_set.index("year"))
+      $freq = "YEARLY"
+    else
+      # procura por um numero (representa um dia)
+      day_list = []
+      is_first = true
+      $recurrence_to_set.each { |val|
+        if (val.to_i > 0)
+          if (is_first and not $has_on_defined)
+            $day     = val
+            is_first = false
+          end
+          day_list.push(val)
+        end
+      }
+    
+      if (day_list.size > 0)
+        $freq = "MONTHLY"
+        $rep  = "BYMONTHDAY=" + day_list.join(",")
+      else
+        week_list = []
+        is_first = true
+        $recurrence_to_set.each { |val|
+          # procura por semanas
+          if ($weeks[val])
+            if (is_first and not $has_on_defined)
+              is_first = false
+
+              c_week = $today.wday
+              c_add = ($weeks[val] - 1) - c_week
+              if (c_add < 0)
+                c_add = 7 + c_add
+              end
+  
+              new_day = $today + (c_add * 86400)
+              $day     = new_day.day
+              $month   = new_day.month
+              $year    = new_day.year
+            end
+            value = val[0..1].upcase
+            week_list.push(value)
+          end
+        }
+    
+        if (week_list.size > 0)
+          $freq = "WEEKLY"
+          $rep  = "BYDAY=" + week_list.join(",")
+        else
+          month_list = []
+          $recurrence_to_set.each { |val|
+            # procura por meses
+            if ($months[val])
+              month_list.push($months[val])
+            end
+          }
+      
+          if (month_list.size > 0)
+            $freq = "MONTHLY"
+            $rep  = "BYMONTH=" + month_list.join(",")
+          end
+        end
+      end 
+    end
+  end
 end
 
 $calendar = ARGV[0]
@@ -252,6 +380,13 @@ script = "osascript \"#{current_path}/new_event.scpt\" \"#{$calendar}\" \"#{$des
 $alarm_to_set.each { |val|
   script = script + " -" + val.to_s
 }
+
+if ($freq != 0)
+  script = script + " " + $freq
+  if ($rep != 0)
+    script = script + " " + $rep
+  end
+end
 
 #puts script
 puts `#{script}`
