@@ -135,6 +135,13 @@ https://github.com/rtoshiro/alfred-workflows-addcalendarevent
 
 CHANGELOG
 
+1.9:
+- Try to fix when Calendar name is empty.
+
+1.8:
+- Now you can set an recurrence event
+cal event at 11 every monday
+
 1.7:
 - Accepts capital letters in week names.
 - Accepts all day events. (thx to mishtershmart)
