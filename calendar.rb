@@ -1,3 +1,5 @@
+require 'date'
+
 def strip_or_self(str)
   str.strip! || str if str
 end
@@ -14,6 +16,16 @@ $month = $today.month
 $year = $today.year
 $all_day  = "false"
 $alarm_to_set = []
+$duration = 120 # minutos
+
+$now_date = DateTime.now
+
+$end_hour     = 9
+$end_minute    = 0
+$end_day = $today.day
+$end_month = $today.month
+$end_year = $today.year
+
 
 $has_on_defined = false
 $recurrence_to_set = []
@@ -142,6 +154,26 @@ def parse_cal(query)
         }
       end
     end
+  end
+
+  # Duration 
+  if (query.index(" dur ")) 
+    list = query.split(" dur ")
+    values = strip_or_self(list[1])
+    params = values.split(" ")
+    if (params.size > 0)
+      value = params[0].to_i
+      unit = params[1]
+      
+      if (!$multiplier[unit].nil?)
+        value = value * $multiplier[unit]
+        if (value > 0)
+          $duration = value
+        end
+      end
+    end
+    
+    query = list[0]
   end
 
   # Date
@@ -376,7 +408,7 @@ end
 
 current_path = File.expand_path File.dirname(__FILE__)
 
-script = "osascript \"#{current_path}/new_event.scpt\" \"#{$calendar}\" \"#{$desc.to_s}\" #{$year.to_s} #{$month.to_s} #{$day.to_s} #{$hour.to_s} #{$minute.to_s} \"#{$location.to_s}\" #{$all_day}"
+script = "osascript \"#{current_path}/new_event.scpt\" \"#{$calendar}\" \"#{$desc.to_s}\" #{$year.to_s} #{$month.to_s} #{$day.to_s} #{$hour.to_s} #{$minute.to_s} #{$duration} \"#{$location.to_s}\" #{$all_day}"
 $alarm_to_set.each { |val|
   script = script + " -" + val.to_s
 }
@@ -388,5 +420,5 @@ if ($freq != 0)
   end
 end
 
-#puts script
+# puts script
 puts `#{script}`
