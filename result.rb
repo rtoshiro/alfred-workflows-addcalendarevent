@@ -91,7 +91,7 @@ def parse_cal(query)
     list = query.split(" alarm ")
     alarms = strip_or_self(list[1])
     query = list[0]
-    
+
     alarm_list = alarms.split(" ")
     if (alarm_list.size > 1)
       counter = "."
@@ -110,14 +110,14 @@ def parse_cal(query)
   end
 
   # Calendar Name
-  if (query.index(" @")) 
+  if (query.index(" @"))
     list = query.split(" @")
     $calendar = strip_or_self(list[1])
     query = list[0]
   end
 
-  # Location 
-  if (query.index(" in ")) 
+  # Location
+  if (query.index(" in "))
     list = query.split(" in ")
     $location = strip_or_self(list[1])
     query = list[0]
@@ -130,14 +130,14 @@ def parse_cal(query)
     if (list[1])
       recurrencies = strip_or_self(list[1])
       query = list[0]
-    
+
       recurrence_list = recurrencies.split(" ")
       if (recurrence_list.size > 0)
         counter = "."
         recurrence_list.each { |val|
           value = strip_or_self(val)
           value = value.downcase
-      
+
           $recurrence_to_set.push(value)
         }
       end
@@ -146,16 +146,16 @@ def parse_cal(query)
 
   # Date
   # Check if "on" exists
-  if (query.index(" on ")) 
+  if (query.index(" on "))
     $has_on_defined = true
     list = query.split(" on ")
-  
+
     # If month is defined
     if (list[1].index("\/"))
       list_d = list[1].split("\/")
       $day = list_d[0]
       $month = list_d[1]
-    
+
       if (list_d.size > 2)
         $year = list_d[2]
         if ($year.size < 4)
@@ -172,7 +172,7 @@ def parse_cal(query)
         if (c_add < 0)
           c_add = 7 + c_add
         end
-        
+
         new_day = $today + (c_add * 86400)
         $day     = new_day.day
         $month   = new_day.month
@@ -183,35 +183,35 @@ def parse_cal(query)
     end
 
     query = list[0]
-  elsif (query.index(/ [tT]oday/)) 
+  elsif (query.index(/ [tT]oday/))
     $has_on_defined = true
     list = query.split(/ [tT]oday/)
     query = list[0]
-  elsif (query.index(" tomorrow")) 
+  elsif (query.index(" tomorrow"))
     $has_on_defined = true
     list = query.split(" tomorrow")
-    
+
     tomorrow = $today + 86400
     $day     = tomorrow.day
     $month   = tomorrow.month
     $year    = tomorrow.year
-    
+
     query   = list[0]
   end
-  
+
 #   #Time - to
-#   if (query.index(" to ")) 
+#   if (query.index(" to "))
 #     list = query.split(" to ")
 #     query = strip_or_self(list[0])
-#     
+#
 #     $hour_to = list[1]
 #     $minute_to = 0
-# 
+#
 #     if ($hour_to.index(":"))
 #       h_list = $hour_to.split(":")
 #       $hour_to = h_list[0]
 #       $minute_to = h_list[1]
-#       
+#
 #       if ($minute_to.downcase.index("pm"))
 #         min_list = $minute_to.split("pm")
 #         $minute_to = strip_or_self(min_list[0])
@@ -219,7 +219,7 @@ def parse_cal(query)
 #           $hour_to = ($hour_to.to_i + 12).to_s
 #         end
 #       end
-#       
+#
 #       if ($minute_to.downcase.index("am"))
 #         min_list = $minute_to.split("am")
 #         $minute_to = strip_or_self(min_list[0])
@@ -232,19 +232,19 @@ def parse_cal(query)
 #           $hour_to = ($hour_to.to_i + 12).to_s
 #         end
 #       end
-#       
+#
 #       if ($hour_to.downcase.index("am"))
 #         min_list = $hour_to.split("am")
 #         $hour_to = strip_or_self(min_list[0])
 #       end
 #     end
 #   end
-  
+
   # Time - at
-  if (query.index(" at ")) 
+  if (query.index(" at "))
     list = query.split(" at ")
     $desc = strip_or_self(list[0])
-  
+
     $hour = list[1]
     $minute = 0
 
@@ -252,7 +252,7 @@ def parse_cal(query)
       h_list = $hour.split(":")
       $hour = h_list[0]
       $minute = h_list[1]
-      
+
       if ($minute.downcase.index("pm"))
         min_list = $minute.split("pm")
         $minute = strip_or_self(min_list[0])
@@ -260,7 +260,7 @@ def parse_cal(query)
           $hour = ($hour.to_i + 12).to_s
         end
       end
-      
+
       if ($minute.downcase.index("am"))
         min_list = $minute.split("am")
         $minute = strip_or_self(min_list[0])
@@ -273,7 +273,7 @@ def parse_cal(query)
           $hour = ($hour.to_i + 12).to_s
         end
       end
-      
+
       if ($hour.downcase.index("am"))
         min_list = $hour.split("am")
         $hour = strip_or_self(min_list[0])
@@ -283,7 +283,7 @@ def parse_cal(query)
     $desc = query
     $all_day = "true"
   end
-  
+
   if ($recurrence_to_set.size > 0)
     # se tem dia
     if ($recurrence_to_set.include?("day"))
@@ -307,7 +307,7 @@ def parse_cal(query)
           day_list.push(val)
         end
       }
-    
+
       if (day_list.size > 0)
         $freq = "MONTHLY;"
         $rep  = "BYMONTHDAY=" + day_list.join(",")
@@ -325,7 +325,7 @@ def parse_cal(query)
               if (c_add < 0)
                 c_add = 7 + c_add
               end
-  
+
               new_day = $today + (c_add * 86400)
               $day     = new_day.day
               $month   = new_day.month
@@ -335,7 +335,7 @@ def parse_cal(query)
             week_list.push(value)
           end
         }
-    
+
         if (week_list.size > 0)
           $freq = "WEEKLY;"
           $rep  = "BYDAY=" + week_list.join(",")
@@ -347,50 +347,55 @@ def parse_cal(query)
               month_list.push($months[val])
             end
           }
-      
+
           if (month_list.size > 0)
             $freq = "MONTHLY;"
             $rep  = "BYMONTH=" + month_list.join(",")
           end
         end
-      end 
+      end
     end
   end
-  
+
 end
 
 query = ARGV[0]
-parse_cal(query)
-subtitle = "Date: #{$day}/#{$month}/#{$year} - #{$hour}:" + ("%02d" % $minute)
-if $location != "" 
-  subtitle = subtitle + "   Location:#{$location}"
-end
-
-if $freq != 0
-  freq_str = ""
-  if ($freq == "DAILY;")
-    freq_str = "daily"
-  elsif ($freq == "WEEKLY;")
-    freq_str = "weekly"
-  elsif ($freq == "MONTHLY;")
-    freq_str = "monthly"
-  elsif ($freq == "YEARLY;")
-    freq_str = "yearly"
-  elsif ($freq == "DAILY;")
-    freq_str = "daily"
+if (query[/^default/])
+  item = "<item uid=\"addcalendarevent\" arg=\"#{query}\" ><title>Change Default Calendar Name</title><subtitle>Click to change</subtitle><icon>icon.png</icon></item>"
+  puts "<?xml version=\"1.0\"?><items>#{item}</items>"
+else
+  parse_cal(query)
+  subtitle = "Date: #{$day}/#{$month}/#{$year} - #{$hour}:" + ("%02d" % $minute)
+  if $location != ""
+    subtitle = subtitle + "   Location:#{$location}"
   end
-  subtitle = subtitle + " - Repeat: " + freq_str
+
+  if $freq != 0
+    freq_str = ""
+    if ($freq == "DAILY;")
+      freq_str = "daily"
+    elsif ($freq == "WEEKLY;")
+      freq_str = "weekly"
+    elsif ($freq == "MONTHLY;")
+      freq_str = "monthly"
+    elsif ($freq == "YEARLY;")
+      freq_str = "yearly"
+    elsif ($freq == "DAILY;")
+      freq_str = "daily"
+    end
+    subtitle = subtitle + " - Repeat: " + freq_str
+  end
+  item = "<item uid=\"addcalendarevent\" arg=\"#{query}\" ><title>#{$desc}</title><subtitle>#{subtitle}</subtitle><icon>icon.png</icon></item>"
+
+  if ($alarm_to_set.size == 0)
+    $alarm_to_set.push("at event time")
+  end
+
+  count = 1
+  $alarm_to_set.each { |val|
+    item = item + "<item uid=\"alarm#{val}\" arg=\"\" valid=\"no\" ><title>Alarm #{count}</title><subtitle>#{val}</subtitle><icon>alarm.png</icon></item>"
+    count = count + 1
+  }
+
+  puts "<?xml version=\"1.0\"?><items>#{item}</items>"
 end
-item = "<item uid=\"addcalendarevent\" arg=\"#{query}\" ><title>#{$desc}</title><subtitle>#{subtitle}</subtitle><icon>icon.png</icon></item>"
-
-if ($alarm_to_set.size == 0)
-  $alarm_to_set.push("at event time")
-end
-
-count = 1
-$alarm_to_set.each { |val|
-  item = item + "<item uid=\"alarm#{val}\" arg=\"\" valid=\"no\" ><title>Alarm #{count}</title><subtitle>#{val}</subtitle><icon>alarm.png</icon></item>"
-  count = count + 1
-}
-
-puts "<?xml version=\"1.0\"?><items>#{item}</items>"

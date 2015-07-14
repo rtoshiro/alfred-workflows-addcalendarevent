@@ -44,10 +44,12 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
 				<key>escaping</key>
 				<integer>4</integer>
 				<key>script</key>
-				<string>osascript main.scpt "{query}"</string>
+				<string>osascript mainnew.scpt "{query}"</string>
 				<key>type</key>
 				<integer>0</integer>
 			</dict>
@@ -142,6 +144,10 @@ A huge hug.
 https://github.com/rtoshiro/alfred-workflows-addcalendarevent
 
 CHANGELOG
+
+1.11:
+- Now you can change the default Calendar name.
+- Bug fixes.
 
 1.10:
 - Now you can set event's duration time.
