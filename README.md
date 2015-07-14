@@ -6,6 +6,8 @@ Just type:
 
 `cal [event] at [time][am|pm] [on [date]] [dur] [every] in [location] @[calendar name] alarm [X min|hour|day|month|year]`
 
+![01](./readme/02.jpg)
+
 ## Just have in mind some keywords:
 
 at - on - dur - every - in - @ - alarm
@@ -23,6 +25,8 @@ cal some important event at 9pm tomorrow dur 4 hours
 Create an event tomorrow from 9pm to 1am
 
 You can omit "at" for "all day event"
+
+![01](./readme/01.jpg)
 
 ## More examples:
 
