@@ -8,9 +8,25 @@ Just type:
 
 ![01](./readme/02.jpg)
 
+`cal default`
+
+![Example](./readme/03.jpg)
+
 ## Just have in mind some keywords:
 
 at - on - dur - every - in - @ - alarm
+
+## First execution
+
+When you execute the cal command for the first time, Calendar will pop a dialog like this:
+
+![Example](./readme/03.jpg)
+
+You have to select the default Calendar name that will be used to create new events.
+
+You can change it later typing:
+
+`cal default`
 
 ## See some examples:
 
