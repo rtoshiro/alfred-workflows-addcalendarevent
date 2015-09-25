@@ -66,4 +66,4 @@ You can omit "at" for "all day event"
     cal event at 2pm on saturday
     cal event at 2pm on sat every day
     
-And, if you can help me, please donate => <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=rtoshiro%40gmail%2ecom&lc=US&item_name=Toshiro&no_note=0&currency_code=BRL&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHostedGuest"><img border="0" alt="Visualizar imagem" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" /></a>
+ <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=rtoshiro%40gmail%2ecom&lc=US&item_name=Toshiro&no_note=0&currency_code=BRL&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHostedGuest"><img border="0" alt="Visualizar imagem" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" /></a>
