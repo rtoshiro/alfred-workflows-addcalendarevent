@@ -91,6 +91,8 @@ def parse_cal(query)
     list = query.split(" alarm ")
     alarms = strip_or_self(list[1])
     query = list[0]
+    
+    return nil if alarms.nil?
 
     alarm_list = alarms.split(" ")
     if (alarm_list.size > 1)
@@ -149,6 +151,8 @@ def parse_cal(query)
   if (query.index(" on "))
     $has_on_defined = true
     list = query.split(" on ")
+
+    return nil if list[1].nil?
 
     # If month is defined
     if (list[1].index("\/"))
@@ -246,6 +250,8 @@ def parse_cal(query)
     $desc = strip_or_self(list[0])
 
     $hour = list[1]
+    return nil if $hour.nil?
+
     $minute = 0
 
     if ($hour.index(":"))

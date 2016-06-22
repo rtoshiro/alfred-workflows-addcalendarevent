@@ -17,6 +17,8 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
 			</dict>
 		</array>
 		<key>81CE903D-58B3-40A8-AAB1-48891E062E2D</key>
@@ -28,6 +30,8 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
 			</dict>
 		</array>
 	</dict>
@@ -50,6 +54,10 @@
 				<integer>4</integer>
 				<key>script</key>
 				<string>osascript mainnew.scpt "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
 				<key>type</key>
 				<integer>0</integer>
 			</dict>
@@ -58,7 +66,7 @@
 			<key>uid</key>
 			<string>606403E8-91C9-4966-92FF-80D901B897E8</string>
 			<key>version</key>
-			<integer>0</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -67,11 +75,7 @@
 				<false/>
 				<key>onlyshowifquerypopulated</key>
 				<true/>
-				<key>output</key>
-				<integer>0</integer>
 				<key>removeextension</key>
-				<false/>
-				<key>sticky</key>
 				<false/>
 				<key>text</key>
 				<string>{query}</string>
@@ -83,11 +87,13 @@
 			<key>uid</key>
 			<string>56D8FF3F-183A-496A-8338-79769ED3D74C</string>
 			<key>version</key>
-			<integer>0</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>escaping</key>
@@ -106,6 +112,10 @@
 				<string>Creating Event...</string>
 				<key>script</key>
 				<string>ruby result.rb "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
 				<key>subtext</key>
 				<string>cal [event] [at [time][am|pm]] [on [date]] [every [date]] in [location] @[calendar name] alarm [X min|hour|day|month|year] ...</string>
 				<key>title</key>
@@ -120,7 +130,7 @@
 			<key>uid</key>
 			<string>81CE903D-58B3-40A8-AAB1-48891E062E2D</string>
 			<key>version</key>
-			<integer>0</integer>
+			<integer>2</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -194,18 +204,24 @@ cal event at 11 every monday
 	<dict>
 		<key>56D8FF3F-183A-496A-8338-79769ED3D74C</key>
 		<dict>
+			<key>xpos</key>
+			<integer>510</integer>
 			<key>ypos</key>
-			<real>10</real>
+			<integer>200</integer>
 		</dict>
 		<key>606403E8-91C9-4966-92FF-80D901B897E8</key>
 		<dict>
+			<key>xpos</key>
+			<integer>310</integer>
 			<key>ypos</key>
-			<real>10</real>
+			<integer>200</integer>
 		</dict>
 		<key>81CE903D-58B3-40A8-AAB1-48891E062E2D</key>
 		<dict>
+			<key>xpos</key>
+			<integer>100</integer>
 			<key>ypos</key>
-			<real>130</real>
+			<integer>200</integer>
 		</dict>
 	</dict>
 	<key>webaddress</key>
