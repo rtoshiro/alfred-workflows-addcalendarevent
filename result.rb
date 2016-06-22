@@ -19,6 +19,7 @@ $has_on_defined = false
 $recurrence_to_set = []
 $freq = 0
 $rep  = 0
+$duration = 0
 
 $hour_to = -1
 $minute_to = 0
@@ -37,8 +38,11 @@ $multiplier["days"] = 1440
 $multiplier["w"] = 10080
 $multiplier["week"] = 10080
 $multiplier["weeks"] = 10080
+$multiplier["m"] = 43200
+$multiplier["mon"] = 43200
 $multiplier["month"] = 43200
 $multiplier["months"] = 43200
+$multiplier["y"] = 525600
 $multiplier["year"] = 525600
 $multiplier["years"] = 525600
 
@@ -145,6 +149,31 @@ def parse_cal(query)
       end
     end
   end
+  
+  
+  # Duration 
+  if (query.index(" dur ")) 
+    list = query.split(" dur ")
+    values = strip_or_self(list[1])
+    
+    return nil if values.nil?
+    
+    params = values.split(" ")
+    if (params.size > 0)
+      value = params[0].to_i
+      unit = params[1]
+      
+      if (!$multiplier[unit].nil?)
+        value = value * $multiplier[unit]
+        if (value > 0)
+          $duration = value
+        end
+      end
+    end
+    
+    query = list[0]
+  end
+
 
   # Date
   # Check if "on" exists
@@ -372,6 +401,14 @@ if (query[/^default/])
 else
   parse_cal(query)
   subtitle = "Date: #{$day}/#{$month}/#{$year} - #{$hour}:" + ("%02d" % $minute)
+  
+  if ($duration > 0)
+    fromTime = Time.new($year, $month, $day, $hour, $minute, 0)
+    toTime = fromTime + ($duration * 60)
+
+    subtitle = subtitle + " to #{toTime.day}/#{toTime.month}/#{toTime.year} - #{toTime.hour}:" + ("%02d" % toTime.min)
+  end
+  
   if $location != ""
     subtitle = subtitle + "   Location:#{$location}"
   end
