@@ -155,6 +155,9 @@ https://github.com/rtoshiro/alfred-workflows-addcalendarevent
 
 CHANGELOG
 
+1.2.1:
+- New commands: dur and every
+
 1.12:
 - Bug fix
 
@@ -224,6 +227,8 @@ cal event at 11 every monday
 			<integer>200</integer>
 		</dict>
 	</dict>
+	<key>version</key>
+	<string>1.2.1</string>
 	<key>webaddress</key>
 	<string>https://github.com/rtoshiro/alfred-workflows-addcalendarevent</string>
 </dict>

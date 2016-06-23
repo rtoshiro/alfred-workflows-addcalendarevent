@@ -1,6 +1,6 @@
 # alfred-workflows-addcalendarevent
 
-Workflow for Alfred 2 to add an event in Calendar.
+Workflow for Alfred 2 (and 3) to add an event in Calendar.
 
 Just type:
 
