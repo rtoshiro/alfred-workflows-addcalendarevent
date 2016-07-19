@@ -16,7 +16,7 @@ $month = $today.month
 $year = $today.year
 $all_day  = "false"
 $alarm_to_set = []
-$duration = 120 # minutos
+$duration = 60 # minutos
 
 $now_date = DateTime.now
 
