@@ -49,6 +49,7 @@ $multiplier["days"] = 1440
 $multiplier["w"] = 10080
 $multiplier["week"] = 10080
 $multiplier["weeks"] = 10080
+$multiplier["mo"] = 43200
 $multiplier["month"] = 43200
 $multiplier["months"] = 43200
 $multiplier["year"] = 525600
@@ -420,5 +421,5 @@ if ($freq != 0)
   end
 end
 
-# puts script
+puts script
 puts `#{script}`
