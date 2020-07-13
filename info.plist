@@ -94,6 +94,12 @@
 			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>escaping</key>
@@ -130,7 +136,7 @@
 			<key>uid</key>
 			<string>81CE903D-58B3-40A8-AAB1-48891E062E2D</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -235,8 +241,10 @@ cal event at 11 every monday
 			<integer>200</integer>
 		</dict>
 	</dict>
+	<key>variablesdontexport</key>
+	<array/>
 	<key>version</key>
-	<string>1.2.3</string>
+	<string>1.2.4</string>
 	<key>webaddress</key>
 	<string>https://github.com/rtoshiro/alfred-workflows-addcalendarevent</string>
 </dict>

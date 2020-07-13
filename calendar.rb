@@ -421,5 +421,5 @@ if ($freq != 0)
   end
 end
 
-puts script
+# puts script
 puts `#{script}`
